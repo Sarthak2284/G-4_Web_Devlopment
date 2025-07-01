@@ -63,11 +63,24 @@
 
 // console.log(d);
 
-for (var i = 0; i<=5; i++){
-   function closure(i){
-     setTimeout(()=>{
-        console.log(i);
-    },2000)
+// for (var i = 0; i<=5; i++){
+//    function closure(i){
+//      setTimeout(()=>{
+//         console.log(i);
+//     },2000)
+// }
+// closure(i);
+// }
+
+
+// HOF
+
+function xyz(cb){
+    return cb();
 }
-closure(i);
+
+function cb(){
+    console.log("I am cb");
 }
+
+xyz(cb);
