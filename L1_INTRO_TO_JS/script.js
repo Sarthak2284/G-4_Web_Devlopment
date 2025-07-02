@@ -26,7 +26,7 @@
 // // //         console.log(x);
 // // //         console.log(y);
 // // //         console.log(z);
-        
+
 // // //         console.log(aa);
 // // //         {
 // // //             let aa = 20000;
@@ -75,11 +75,11 @@
 
 // HOF
 
-function xyz(cb){
+function xyz(cb) {
     return cb();
 }
 
-function cb(){
+function cb() {
     console.log("I am cb");
 }
 
