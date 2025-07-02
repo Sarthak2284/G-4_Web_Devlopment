@@ -23,4 +23,15 @@ function thankyou(cb){
     setTimeout(cb,4000)
 }
 
+function finish(){
+    console.log("Finish....")
+}
 console.log("SCRIPT END")
+
+ok(()=>{
+    fine(()=>{
+        thankyou(()=>{
+            finish()
+        })
+    })
+})
