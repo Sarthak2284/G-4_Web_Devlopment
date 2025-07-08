@@ -7,8 +7,10 @@ async function getData(){
         list.innerHTML = ""
         data.products.forEach(product => {
             const li = document.createElement("li");
-          li.textContent = `${product.title} - Rs${Math.round(product.price*85)}- ${product.category} - ${product.rating}`;
-          list.appendChild(li);
+            li.textContent = `${product.title} - Rs${Math.round(product.price*85)}- ${product.category} - ${product.rating}
+           <br>
+                <img src="${product.thumbnail}" alt="${product.title}" width="100">`;
+            list.appendChild(li);
         });
     }
     catch(error){
