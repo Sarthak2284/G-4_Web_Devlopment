@@ -51,18 +51,6 @@ crypto.scrypt('password', 'salt', 64, (err, derivedKey) => {
   console.log('Scrypt Hash:', derivedKey.toString('hex'));
 });
 
-
-crypto.generateKeyPair('rsa', {
-  modulusLength: 2048,
-  publicKeyEncoding: { type: 'pkcs1', format: 'pem' },
-  privateKeyEncoding: { type: 'pkcs1', format: 'pem' }
-}, (err, pubKey, privKey) => {
-  if (err) throw err;
-  console.log('Public Key:', pubKey);
-  console.log('Private Key:', privKey);
-});
-
-
 console.log('Available Hashes:', crypto.getHashes());
 console.log('Available Ciphers:', crypto.getCiphers());
 console.log('Available Curves:', crypto.getCurves());
