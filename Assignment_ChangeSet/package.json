@@ -1,0 +1,27 @@
+{
+  "name": "assignment_changeset",
+  "version": "1.0.2",
+  "description": "this is an assignment package.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sarthak2284/G-4_Web_Devlopment.git"
+  },
+  "keywords": [
+    "Math",
+    "Addition",
+    "Subtraction"
+  ],
+  "author": "Sarthak Jyoti Mishra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sarthak2284/G-4_Web_Devlopment/issues"
+  },
+  "homepage": "https://github.com/Sarthak2284/G-4_Web_Devlopment#readme",
+  "dependencies": {
+    "@changesets/cli": "^2.29.5"
+  }
+}
