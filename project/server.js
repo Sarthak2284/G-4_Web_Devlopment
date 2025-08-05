@@ -2,7 +2,7 @@ const express = require('express');
 require('dotenv').config(); 
 const mongoose = require('mongoose');
 const PORT = process.env.PORT || 4888
-
+const userRoutes = require('./routes/userRoutes')
 const app = express();
 
 app.use(express.json());
@@ -16,9 +16,11 @@ async function connectToDatabase() {
 })
 }
 
+app.use("/api/user",userRoutes)
 app.get('/', (req,res)=>{
-    res.send('Hello guys, Welcome to Express');
+    res.send('This is Dashboard');
 })
+
 
 
 connectToDatabase().then(()=>{
