@@ -1,28 +1,79 @@
-const User = require('../models/userModel'); // Assuming you have a User model defined in models/userModel.js
-const registerUser = async (req,res)=>{
-    try{
-        const { firstName, lastName, email, password} = req.body;
-        if(!firstName || !email || !password){
-            return res.status(400).send({message: 'Please fill all the required fields'});
-        }
-        const userExist = await User.finOne({email});
-        if(userExist){
-            return res.status(400).json("ALREADY EXISTS: ", {userExist});
-        }
+const User = require("../models/userModel");
+const bcrypt = require("bcrypt");
+const generateToken = require("../utils/generateTokens");
 
-        const newUser = await User.create({
-            firstName, lastName, email, password
-        });
+const registerUser = async (req, res) => {
+  const { firstName, lastName, emailId, password } = req.body;
 
+  //VALIDATION
 
-        await newUser.save();
+  if (!firstName || !emailId || !password) {
+    return res.status(400).send({ message: "Please Add all mandatory fields" });
+  }
 
-        res.status(201).json("USER ADDED",{newUser})
-    }catch(err){
-        console.error('Error in registerUser:', err);
-        res.status(500).json({ message: 'Internal Server Error' });
+  try {
+    //Check the user existing already in db or not
+    const userExists = await User.findOne({ emailId });
+    if (userExists) {
+      return res.status(400).json({ message: "Already Exist" });
     }
-}
 
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-module.exports = { registerUser }
+    //CREATE USER IN YOUR DATABASE
+
+    const newUser = await User.create({
+      firstName,
+      lastName,
+      emailId,
+      password: hashedPassword,
+    });
+
+    await newUser.save();
+    const token = generateToken(newUser);
+
+    return res.status(201).json({
+      message: "USER ADDED SUCCESSFULLY",
+      token,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      err: err.message,
+    });
+  }
+};
+
+const loginUser = async (req, res) => {
+  const { emailId, password } = req.body;
+
+  //VALIDATION
+
+  if (!emailId || !password) {
+    return res.status(400).json({ message: "ADD ALL DETAILS" });
+  }
+
+  try{
+    const userExists = await User.findOne({ emailId });
+  console.log(userExists);
+
+  if (!userExists) {
+    return res.status(400).json({ message: "No user Found" });
+  }
+
+  const isValid = await bcrypt.compare(password, userExists.password);
+
+  if (!isValid) {
+    return res.status(400).json({ message: "Incorrect Password" });
+  }
+
+  const token = generateToken(userExists);
+
+  return res.status(200).json({ message: "LoggedIn", token });
+  }catch(err){
+    return res.status(500).json({
+      err: err.message,
+    });
+  }
+};
+
+module.exports = { registerUser, loginUser };
