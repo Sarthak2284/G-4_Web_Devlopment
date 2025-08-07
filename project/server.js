@@ -3,6 +3,7 @@ const express = require("express");
 require("dotenv").config();
 const dbConnect = require("./config/database");
 const userRouter = require("./routes/userRoutes");
+const profileRouter = require("./routes/profileRoutes");
 
 //SET INSTANCES HERE ONLY
 const app = express();
@@ -18,6 +19,7 @@ app.use(express.json());
 
 //WE WILLL MAKE ROUTES
 app.use("/api/user",userRouter)
+app.use("/api/profile",profileRouter)
 
 
 dbConnect().then(() => {
