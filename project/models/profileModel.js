@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const ProfileSchema = new Schema({
+    userId: { type: Schema.Types.ObjectId, required: true},
     imageUrl:{
         type: String,
         required: true

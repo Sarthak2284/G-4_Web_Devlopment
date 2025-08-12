@@ -1,6 +1,8 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const generateToken = require("../utils/generateTokens");
+const validator = require("validator");
+
 
 const registerUser = async (req, res) => {
   const { firstName, lastName, emailId, password } = req.body;
@@ -11,6 +13,16 @@ const registerUser = async (req, res) => {
     return res.status(400).send({ message: "Please Add all mandatory fields" });
   }
 
+  if(!validator.isEmail(emailId)){
+    return res.status(400).send({ message: "Please Provide Correct Email" });
+  }
+
+  if(!validator.isStrongPassword(password)){
+    return res.status(400).send({ message: "Please Provide Strong Password" });
+  }
+
+
+
   try {
     //Check the user existing already in db or not
     const userExists = await User.findOne({ emailId });
@@ -19,8 +31,6 @@ const registerUser = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    //CREATE USER IN YOUR DATABASE
 
     const newUser = await User.create({
       firstName,
