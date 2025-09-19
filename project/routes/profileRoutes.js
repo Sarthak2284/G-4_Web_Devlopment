@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", getProfile);
 router.post("/",authMiddleware, createProfile);
-router.post("/update",  authMiddleware,updateProfile);
+router.put("/update",  authMiddleware,updateProfile);
 
 
 

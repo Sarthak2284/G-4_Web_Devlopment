@@ -13,10 +13,10 @@ const getProfile = async (req,res)=>{
 
 const createProfile = async (req, res)=>{
 
-    const {imageUrl, summary, skills, workExperience, linkedInUrl, githubUrl, codingPlatforms,s, resumeUrl} = req.body;
+    const {imageUrl, summary, skills, workExperience, linkedInUrl, githubUrl, codingPlatforms, resumeUrl} = req.body;
     
     const dataOfUser = req.user[0];
-    // console.log(dataOfUser);
+    console.log(dataOfUser);
     
     const { _id} = dataOfUser;
     // console.log(_id);

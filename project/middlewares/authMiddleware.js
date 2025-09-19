@@ -23,16 +23,16 @@ const authMiddleware = async (req, res, next) => {
     }
 
     // Assuming userData contains userId directly
-    const _id = userData.userId; 
+    const {_id} = userData.user; 
 
-    // You can attach the user ID to the request object for further use
-    req.userId = _id;
+    
 
     const user = await User.find({ _id });
 
     console.log(user);
 
-    if(user.length === 0)  return res.status(404).json({ message: "User not found" });       
+    if(user.length === 0)  return res.status(404).json({ message: "User not found" });   
+    req.user = user    
     next(); 
   } catch (error) {
     return res.status(401).json({ message: "Invalid token", error: error.message });

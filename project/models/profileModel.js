@@ -2,17 +2,17 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const ProfileSchema = new Schema({
-    userId: { type: Schema.Types.ObjectId, required: true},
-    imageUrl:{
+    userId: { type: Schema.Types.ObjectId},
+    imageUrl: {
         type: String,
         required: true
     },
-    summary:{
+    summary: {
         type: String,
         required: true
     },
 
-    skills:{
+    skills: {
         type: String,
         required: true
     },
@@ -24,7 +24,7 @@ const ProfileSchema = new Schema({
         type: String,
         required: true
     },
-    githubUrl:{
+    githubUrl: {
         type: String,
         required: true
     },
@@ -32,12 +32,12 @@ const ProfileSchema = new Schema({
         type: [String],
         required: true
     },
-    resumeUrl:{
+    resumeUrl: {
         type: String,
         required: true
     }
 
 
-},{timestamps: true});
+}, { timestamps: true });
 
 module.exports = mongoose.model("Profile", ProfileSchema);
